@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import {MarkComponent} from "./Mark/mark.component";
 import {MarkModule} from "./Mark/mark.module";
 import {NavbarComponent} from "./Layout/navbar/navbar.component";
+import { MarkNewComponent } from './Mark/mark-new/mark-new.component';
 
 
 const appRoutes: Routes = [
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    MarkNewComponent
   ],
   imports: [
     BrowserModule,

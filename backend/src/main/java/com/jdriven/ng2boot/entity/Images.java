@@ -1,19 +1,25 @@
 package com.jdriven.ng2boot.entity;
 
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A Images.
  */
 @Entity
+@EqualsAndHashCode
 @Table(name = "image")
 public class Images implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -27,13 +33,7 @@ public class Images implements Serializable {
 //    private Long mark;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getImageSrc() {
         return imageSrc;
@@ -63,7 +63,7 @@ public class Images implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -76,13 +76,13 @@ public class Images implements Serializable {
             return false;
         }
         return Objects.equals(getId(), images.getId());
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int hashCode() {
         return Objects.hashCode(getId());
     }
-
+*/
     @Override
     public String toString() {
         return "Images{" +
