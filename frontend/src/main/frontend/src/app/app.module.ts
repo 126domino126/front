@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,11 +10,16 @@ import {MarkComponent} from "./Mark/mark.component";
 import {MarkModule} from "./Mark/mark.module";
 import {NavbarComponent} from "./Layout/navbar/navbar.component";
 import { MarkNewComponent } from './Mark/mark-new/mark-new.component';
+import { LoginComponent } from './login/login.component';
+import { AuthenticationService}  from './authenticationService'
+import {MarkService} from "./Mark/mark.service";
 
 
 const appRoutes: Routes = [
   { path: 'marks', component: MarkComponent },
   { path: '', component: NavbarComponent },
+  { path: 'login', component: LoginComponent },
+
   // { path: '', component: HomeComponent },
 ];
 
@@ -21,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    MarkNewComponent
+    MarkNewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+    providers: [ MarkService, AuthenticationService ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
