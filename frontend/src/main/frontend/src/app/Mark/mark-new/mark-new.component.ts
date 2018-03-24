@@ -5,6 +5,8 @@ import {Observable} from "rxjs/Observable";
 import {EventManager} from "@angular/platform-browser";
 import {MarkService} from "../mark.service";
 import {Image} from "../../Image/image.model";
+import { Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-mark-new',
@@ -13,15 +15,13 @@ import {Image} from "../../Image/image.model";
 })
 export class MarkNewComponent implements OnInit {
 
-  mark: Mark;
+  mark: Mark = new Mark(null, '', '','', false, [], []);
   isSaving: boolean;
 
   images: Image[] = [];
-
-  constructor(
-    // public activeModal: NgbActiveModal,
-    private markService: MarkService,
-    private eventManager: EventManager
+  constructor(private markService: MarkService,
+              private eventManager: EventManager,
+              private router: Router,
   ) {
   }
 
@@ -46,7 +46,7 @@ export class MarkNewComponent implements OnInit {
   }
 
   addImage() {
-    // this.images.push(new Image(undefined, null, null));
+     this.images.push(new Image(undefined, null));
   }
 
   removeImage(index) {
@@ -62,6 +62,9 @@ export class MarkNewComponent implements OnInit {
 
     this.mark.markImages = this.images.slice(0);
 
-    this.markService.create(this.mark).subscribe( res => this.mark = res );
+    this.markService.create(this.mark).subscribe( res => {
+      this.mark = res;
+      this.router.navigateByUrl('/marks');
+    } );
   }
 }

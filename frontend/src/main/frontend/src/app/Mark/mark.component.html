@@ -9,8 +9,15 @@
     <!--</button>-->
   <!--</h2>-->
   <div class="row">
+
   </div>
+
+  <button class="btn btn-primary" routerLinkActive="active" routerLink="/marks/new"> New mark</button>
+
   <br/>
+  <br/>
+  <br/>
+
   <div class="table-responsive" *ngIf="marks">
     <table class="table table-striped">
       <thead>
@@ -20,20 +27,34 @@
         <th><span >Main Image Src</span></th>
         <th><span >Description</span></th>
         <th><span >Favourite</span></th>
+        <th><span >Images</span></th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let mark of marks">
+      <tr *ngFor="let mark of marks; let i = index">
         <!--<td><a [routerLink]="['../mark', mark.id ]">{{mark.id}}</a></td>-->
         <td>{{mark.id}}</td>
         <td>{{mark.title}}</td>
-        <td>{{mark.mainImageSrc}}</td>
+        <td>
+          <!--<div align="center">-->
+            <!--<img [src]="this.mark.mainImageSrc" alt=""  style="width:25%"/>-->
+          <!--</div>-->
+        </td>
         <td>{{mark.description}}</td>
         <td>{{mark.favourite}}</td>
+        <td>
+          <!--<div  class="modal-body" id="field_images" *ngFor="let image of marks[i].markImages; let ind = index">-->
+            <!--<img [src]="image.imageSrc" alt="" style="width:100%" />-->
+          <!--</div>-->
+        </td>
 
-        <!--<td class="text-right">-->
-          <!--<div class="btn-group flex-btn-group-container">-->
+
+        <td class="text-right">
+          <div class="btn-group flex-btn-group-container">
+            <button class="btn btn-primary" routerLinkActive="active" routerLink="/marks/edit" > EDIT </button>
+          <button type="button" class="btn btn-danger" (click)="deleteMark(i)"> DELETE </button>
+
             <!--<button type="submit"-->
                     <!--[routerLink]="['../mark', mark.id ]"-->
                     <!--class="btn btn-info btn-sm">-->
@@ -56,8 +77,8 @@
               <!--<span class="fa fa-remove"></span>-->
               <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
             <!--</button>-->
-          <!--</div>-->
-        <!--</td>-->
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>

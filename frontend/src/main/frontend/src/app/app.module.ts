@@ -11,7 +11,6 @@ import {MarkModule} from "./Mark/mark.module";
 import {NavbarComponent} from "./Layout/navbar/navbar.component";
 import { MarkNewComponent } from './Mark/mark-new/mark-new.component';
 import { LoginComponent } from './login/login.component';
-import { AuthenticationService}  from './authenticationService'
 import {MarkService} from "./Mark/mark.service";
 
 
@@ -19,6 +18,8 @@ const appRoutes: Routes = [
   { path: 'marks', component: MarkComponent },
   { path: '', component: NavbarComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'marks/edit', component: LoginComponent },
+  { path: 'marks/new', component: MarkNewComponent },
 
   // { path: '', component: HomeComponent },
 ];
@@ -37,10 +38,10 @@ const appRoutes: Routes = [
     MarkModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      {}
     )
   ],
-    providers: [ MarkService, AuthenticationService ],
+    providers: [ MarkService ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

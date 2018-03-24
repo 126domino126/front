@@ -17,6 +17,7 @@ import java.util.List;
  * REST controller for managing Mark.
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class MarkResource {
 

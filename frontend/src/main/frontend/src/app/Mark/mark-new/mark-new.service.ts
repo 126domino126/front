@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Mark } from './mark.model';
 import {tap} from "rxjs/operators";
+import {Mark} from "../mark.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class MarkService {
+export class MarkNewService {
 
     private resourceUrl =  'http://localhost:8080/api/marks';
 
@@ -33,6 +33,6 @@ export class MarkService {
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete(`${this.resourceUrl}/${id}`, httpOptions);
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, httpOptions);
     }
 }
