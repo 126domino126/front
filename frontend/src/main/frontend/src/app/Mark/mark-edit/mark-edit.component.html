@@ -1,0 +1,58 @@
+<p>
+  mark-new works!
+</p>
+
+<form name="editForm">
+
+  <div class="modal-header">
+    <h4 class="modal-title" id="myMarkLabel">Create or edit a Mark</h4>
+    <button type="button" class="close" routerLink="/marks">&times;</button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label class="form-control-label" for="field_title">Title</label>
+      <input type="text" class="form-control" name="title" id="field_title"
+             [(ngModel)]="mark.title" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="field_mainImageSrc">Main Image Src</label>
+      <div class="modal-body">
+        <img [src]="this.mark.mainImageSrc" alt="" style="width:15%"/>
+        <input type="file" capture="camera" accept="image/*" id="field_mainImageSrc" (change)="displayPhoto($event)" >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="field_description">Description</label>
+      <input type="text" class="form-control" name="description" id="field_description"
+             [(ngModel)]="mark.description" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="field_favourite">Favourite</label>
+      <input type="checkbox" class="form-control" name="favourite" id="field_favourite"
+             [(ngModel)]="mark.favourite" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="field_images">Images</label>
+      <div class="modal-body" id="field_images" *ngFor="let image of images; let i = index">
+        <img [src]="images[i].imageSrc" alt="" style="width:10%" />
+        <input type="file" capture="camera" accept="image/*" (change)="displayImage($event, i)" >
+        <button type="button" class="btn btn-danger" (click)="removeImage(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addImage()">Add</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" routerLink="/marks" data-dismiss="modal" (click)="clear()">
+      <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+    </button>
+    <!--<button type="button" routerLink="/marks" class="btn btn-primary" (click)="save()">-->
+    <button type="button"  class="btn btn-primary" (click)="save()">
+      <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+    </button>
+  </div>
+</form>
+

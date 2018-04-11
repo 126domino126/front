@@ -37,9 +37,9 @@
         <td>{{mark.id}}</td>
         <td>{{mark.title}}</td>
         <td>
-          <!--<div align="center">-->
-            <!--<img [src]="this.mark.mainImageSrc" alt=""  style="width:25%"/>-->
-          <!--</div>-->
+          <div align="center">
+            <img [src]="this.mark.mainImageSrc" alt=""  style="width:25%"/>
+          </div>
         </td>
         <td>{{mark.description}}</td>
         <td>{{mark.favourite}}</td>
@@ -49,34 +49,10 @@
           <!--</div>-->
         </td>
 
-
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
-            <button class="btn btn-primary" routerLinkActive="active" routerLink="/marks/edit" > EDIT </button>
+            <button class="btn btn-primary" routerLinkActive="active" [routerLink]="['/marks/edit', mark.id]" > EDIT </button>
           <button type="button" class="btn btn-danger" (click)="deleteMark(i)"> DELETE </button>
-
-            <!--<button type="submit"-->
-                    <!--[routerLink]="['../mark', mark.id ]"-->
-                    <!--class="btn btn-info btn-sm">-->
-              <!--<span class="fa fa-eye"></span>-->
-              <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
-            <!--</button>-->
-            <!--<button type="submit"-->
-                    <!--[routerLink]="['/', { outlets: { popup: 'mark/'+ mark.id + '/edit'} }]"-->
-                    <!--replaceUrl="true"-->
-                    <!--queryParamsHandling="merge"-->
-                    <!--class="btn btn-primary btn-sm">-->
-              <!--<span class="fa fa-pencil"></span>-->
-              <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
-            <!--</button>-->
-            <!--<button type="submit"-->
-                    <!--[routerLink]="['/', { outlets: { popup: 'mark/'+ mark.id + '/delete'} }]"-->
-                    <!--replaceUrl="true"-->
-                    <!--queryParamsHandling="merge"-->
-                    <!--class="btn btn-danger btn-sm">-->
-              <!--<span class="fa fa-remove"></span>-->
-              <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
-            <!--</button>-->
           </div>
         </td>
       </tr>

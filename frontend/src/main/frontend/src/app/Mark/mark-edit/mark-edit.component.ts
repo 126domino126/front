@@ -1,27 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Mark} from "../mark.model";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {EventManager} from "@angular/platform-browser";
 import {MarkService} from "../mark.service";
 import {Image} from "../../Image/image.model";
-import { Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-mark-new',
-  templateUrl: './mark-new.component.html',
-  styleUrls: ['./mark-new.component.css']
+  templateUrl: './mark-edit.component.html',
+  styleUrls: ['./mark-edit.component.css']
 })
-export class MarkNewComponent implements OnInit {
+export class MarkEditComponent implements OnInit, AfterViewInit {
 
-  mark: Mark = new Mark(null, '', '','', false, [], []);
+  private sub: any;
+  idcko: number;
+
+  mark: Mark;
   isSaving: boolean;
 
   images: Image[] = [];
   constructor(private markService: MarkService,
               private eventManager: EventManager,
               private router: Router,
+              private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.idcko = +params['id']; // (+) converts string 'id' to a number
+      this.markService.find(this.idcko).subscribe(
+        (res => {this.mark = res;
+        this.images = this.mark.markImages;
+          console.log(this.mark);
+          console.log(this.images)
+        })
+      );
+
+      // In a real app: dispatch action to load the details here.
+    });
+    this.isSaving = false;
+    this.markService.find(this.idcko).subscribe(
+      (res => {this.mark = res;
+        this.images = this.mark.markImages;
+        console.log(this.mark);
+        console.log(this.images)
+      })
+    );
+  }
+  ngAfterViewInit(){
+    console.log('View-edit');
+    console.log(this.idcko);
+    this.markService.find(this.idcko).subscribe(
+      (res => {this.mark = res;
+        this.images = this.mark.markImages;
+        console.log(this.mark);
+        console.log(this.images)
+      })
+    );
+    console.log(this.mark.title);
   }
 
   displayPhoto(fileInput) {
@@ -50,10 +90,6 @@ export class MarkNewComponent implements OnInit {
 
   removeImage(index) {
     this.images.splice(index, 1);
-  }
-
-  ngOnInit() {
-    this.isSaving = false;
   }
 
   save() {

@@ -5,6 +5,11 @@ import {Mark} from "./mark.model";
 import {EventManager} from "@angular/platform-browser";
 import {MarkService} from "./mark.service";
 import {Image} from "../Image/image.model";
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent
+} from 'angular-calendar';
 
 @Component({
   selector: 'app-mark',
@@ -14,12 +19,12 @@ import {Image} from "../Image/image.model";
 export class MarkComponent implements OnInit, AfterViewInit {
   marks: Mark[];
   images: Image[];
+  events: CalendarEvent[];
 
   constructor(private markService: MarkService) {
   }
 
   ngAfterViewInit(){
-      console.log('View');
       this.loadAll();
   }
 
@@ -31,12 +36,9 @@ export class MarkComponent implements OnInit, AfterViewInit {
   }
 
   deleteMark(index) {
-
-    console.log('Vypis');
     this.markService.delete(this.marks[index].id).subscribe((res) => {
       this.loadAll();
     });
-
   }
 
   ngOnInit() {
