@@ -6,6 +6,7 @@ import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DemoUtilsModule } from '../demo-utils/module';
 import { DemoComponent } from './component';
 import { RouterModule } from '@angular/router';
+import {EventService} from "../Mark/event.service";
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
         DemoUtilsModule,
         RouterModule
     ],
+    providers: [EventService],
     declarations: [DemoComponent],
     exports: [DemoComponent]
 })

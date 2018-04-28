@@ -19,7 +19,6 @@ import {
 export class MarkComponent implements OnInit, AfterViewInit {
   marks: Mark[];
   images: Image[];
-  events: CalendarEvent[];
 
   constructor(private markService: MarkService) {
   }
@@ -30,8 +29,12 @@ export class MarkComponent implements OnInit, AfterViewInit {
 
   loadAll() {
     this.markService.query().subscribe(
-      (res => {this.marks = res;
-      console.log(this.marks);})
+      (res => {
+        if (res !=null){
+          this.marks = res;
+          console.log(this.marks);
+        }
+      })
     )
   }
 

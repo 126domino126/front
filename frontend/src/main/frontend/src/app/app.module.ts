@@ -17,6 +17,8 @@ import {DemoComponent} from "./demo/component";
 import {DemoModule} from "./demo/module";
 import {CalendarModule} from "angular-calendar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {LineChartDemoComponent} from "./chart/chart.component";
+import {ChartsModule} from "ng2-charts";
 
 
 const appRoutes: Routes = [
@@ -25,11 +27,7 @@ const appRoutes: Routes = [
   { path: 'marks/new', component: MarkNewComponent },
   { path: 'marks', component: MarkComponent },
   { path: '', component: NavbarComponent },
-
-
-
-
-  // { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -38,7 +36,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     MarkNewComponent,
     MarkEditComponent,
-    LoginComponent
+    LoginComponent,
+    LineChartDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +51,7 @@ const appRoutes: Routes = [
     DemoModule,
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
+    ChartsModule
   ],
     providers: [ MarkService ],
   bootstrap: [AppComponent],

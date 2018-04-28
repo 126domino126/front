@@ -1,6 +1,7 @@
 package com.jdriven.ng2boot.controller;
 
 //import com.dominik_dujava.web.rest.util.HeaderUtil;
+import com.jdriven.ng2boot.entity.Events;
 import com.jdriven.ng2boot.entity.Mark;
 import com.jdriven.ng2boot.service.api.MarkService;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * REST controller for managing Mark.
@@ -46,10 +48,6 @@ public class MarkResource {
         }
         Mark result = markService.save(mark);
         return ResponseEntity.created(new URI("/api/marks/" + result.getId())).header("MyResponseHeader", "MyValue").body(result);
-
-//                ResponseEntity.created(new URI("/api/marks/" + result.getId()))
-//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-//            .body(result);
     }
 
     /**

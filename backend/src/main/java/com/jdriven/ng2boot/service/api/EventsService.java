@@ -1,13 +1,14 @@
 package com.jdriven.ng2boot.service.api;
 
-import com.jdriven.ng2boot.entity.Texts;
+import com.jdriven.ng2boot.entity.Events;
 
+import java.awt.*;
 import java.util.List;
 
 /**
  * Service Interface for managing Texts.
  */
-public interface TextsService {
+public interface EventsService {
 
     /**
      * Save a texts.
@@ -15,14 +16,14 @@ public interface TextsService {
      * @param texts the entity to save
      * @return the persisted entity
      */
-    Texts save(Texts texts);
+    Events save(Events texts);
 
     /**
      * Get all the texts.
      *
      * @return the list of entities
      */
-    List<Texts> findAll();
+    List<Events> findAll();
 
     /**
      * Get the "id" texts.
@@ -30,7 +31,7 @@ public interface TextsService {
      * @param id the id of the entity
      * @return the entity
      */
-    Texts findOne(Long id);
+    Events findOne(Long id);
 
     /**
      * Delete the "id" texts.

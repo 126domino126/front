@@ -1,13 +1,4 @@
 <div>
-  <!--<h2>-->
-    <!--<span jhiTranslate="aplikaciaApp.mark.home.title">Marks</span>-->
-    <!--<button class="btn btn-primary float-right jh-create-entity create-mark" [routerLink]="['/', { outlets: { popup: ['mark-new'] } }]">-->
-      <!--<span class="fa fa-plus"></span>-->
-      <!--<span  jhiTranslate="aplikaciaApp.mark.home.createLabel">-->
-            <!--Create new Mark-->
-            <!--</span>-->
-    <!--</button>-->
-  <!--</h2>-->
   <div class="row">
 
   </div>
@@ -44,6 +35,9 @@
         <td>{{mark.description}}</td>
         <td>{{mark.favourite}}</td>
         <td>
+          <div  class="modal-body" id="field_images" *ngFor="let event of marks[i].events; let ind = index">
+          {{ind}}.    {{event.starting}}
+          </div>
           <!--<div  class="modal-body" id="field_images" *ngFor="let image of marks[i].markImages; let ind = index">-->
             <!--<img [src]="image.imageSrc" alt="" style="width:100%" />-->
           <!--</div>-->

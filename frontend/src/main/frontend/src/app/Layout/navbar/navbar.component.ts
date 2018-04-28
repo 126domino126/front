@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isIn = false;   // store state
-  toggleState() { // click handler
+  isIn = false;
+  toggleState() {
     let bool = this.isIn;
     this.isIn = bool === false;
   }

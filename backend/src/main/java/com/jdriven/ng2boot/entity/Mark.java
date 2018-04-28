@@ -3,6 +3,7 @@ package com.jdriven.ng2boot.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -41,9 +42,8 @@ public class Mark implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mark_id")
-    private Set<Texts> textFields = new HashSet<>();
+    private Set<Events> events = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -129,31 +129,29 @@ public class Mark implements Serializable {
         this.markImages = images;
     }
 
-    public Set<Texts> getTextFields() {
-        return textFields;
+    public Set<Events> getEvents() {
+        return events;
     }
 
-    public Mark textFields(Set<Texts> texts) {
-        this.textFields = texts;
+    public Mark events(Set<Events> events) {
+        this.events = events;
         return this;
     }
 
-    public Mark addTextFields(Texts texts) {
-        this.textFields.add(texts);
-        texts.setMark(this);
+    public Mark addEvent(Events events) {
+        this.events.add(events);
         return this;
     }
 
-    public Mark removeTextFields(Texts texts) {
-        this.textFields.remove(texts);
-        texts.setMark(null);
+    public Mark removeEvent(Events events) {
+        this.events.remove(events);
         return this;
     }
 
-    public void setTextFields(Set<Texts> texts) {
-        this.textFields = texts;
+    public void setEvents(Set<Events> events) {
+        this.events = events;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

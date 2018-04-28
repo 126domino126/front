@@ -1,8 +1,8 @@
 import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewChild,
-    TemplateRef
+  Component,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef, OnInit
 } from '@angular/core';
 import {
     startOfDay,
@@ -21,6 +21,11 @@ import {
     CalendarEventAction,
     CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import {Event2} from "../Mark/event.model";
+import {MarkService} from "../Mark/mark.service";
+import {Mark} from "../Mark/mark.model";
+import {EventService} from "../Mark/event.service";
+import {falseIfMissing} from "protractor/built/util";
 
 const colors: any = {
     red: {
@@ -43,12 +48,15 @@ const colors: any = {
     styleUrls: ['styles.css'],
     templateUrl: 'template.html'
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
     @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
     view: string = 'month';
 
     viewDate: Date = new Date();
+
+    marks: Mark[];
+    eventParse: Event2[];
 
     modalData: {
         action: string;
@@ -74,42 +82,70 @@ export class DemoComponent {
     refresh: Subject<any> = new Subject();
 
     events: CalendarEvent[] = [
-        {
-            start: subDays(startOfDay(new Date()), 1),
-            end: addDays(new Date(), 1),
-            title: 'A 3 day event',
-            color: colors.red,
-            actions: this.actions
-        },
-        {
-            start: startOfDay(new Date()),
-            title: 'An event with no end date',
-            color: colors.yellow,
-            actions: this.actions
-        },
-        {
-            start: subDays(endOfMonth(new Date()), 3),
-            end: addDays(endOfMonth(new Date()), 3),
-            title: 'A long event that spans 2 months',
-            color: colors.blue
-        },
-        {
-            start: addHours(startOfDay(new Date()), 2),
-            end: new Date(),
-            title: 'A draggable and resizable event',
-            color: colors.yellow,
-            actions: this.actions,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            },
-            draggable: true
-        }
     ];
 
     activeDayIsOpen: boolean = true;
 
-    constructor(private modal: NgbModal) {}
+    constructor(private modal: NgbModal,
+                private markService: MarkService,
+                private eventService: EventService) {}
+
+    ngOnInit() {
+
+      this.eventService.query().subscribe(
+        (res => {
+          if (res !=null){
+            this.eventParse = res;
+            for (let i=0; i<this.eventParse.length; i++){
+              this.events.push({
+                id: this.eventParse[i].id,
+                title: this.eventParse[i].title,
+                color: {
+                  primary: this.eventParse[i].colorPrim,
+                  secondary: this.eventParse[i].colorSec
+                },
+                actions: this.actions,
+                start: new Date(this.eventParse[i].starting),
+                end: new Date(this.eventParse[i].ending),
+                draggable: false,
+                resizable: {
+                  beforeStart: false,
+                  afterEnd: false
+                }
+              });
+              this.refresh.next();
+            }
+
+            for (let i=0; i<this.eventParse.length; i++) {
+              let startDate = new Date(this.eventParse[i].starting);
+              let endDate = new Date(this.eventParse[i].ending);
+              while (startDate.getFullYear() !== new Date().getFullYear()+3 && this.eventParse[i].repeat !==0 ) {
+                startDate = addDays(startDate,this.eventParse[i].repeat);
+                endDate = addDays(endDate,this.eventParse[i].repeat);
+                this.events.push(
+                  {
+                    id: this.eventParse[i].id,
+                    title: this.eventParse[i].title,
+                    color: {
+                      primary: this.eventParse[i].colorPrim,
+                      secondary: this.eventParse[i].colorSec
+                    },
+                    actions: this.actions,
+                    start: startDate,
+                    end: endDate,
+                    draggable: false,
+                    resizable: {
+                      beforeStart: false,
+                      afterEnd: false
+                    }
+                  }
+                )
+              }
+            }
+          }
+        })
+      )
+    }
 
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {

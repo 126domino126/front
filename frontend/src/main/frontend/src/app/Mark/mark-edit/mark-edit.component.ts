@@ -6,6 +6,7 @@ import {EventManager} from "@angular/platform-browser";
 import {MarkService} from "../mark.service";
 import {Image} from "../../Image/image.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Subject} from "rxjs/Subject";
 
 
 @Component({
@@ -18,10 +19,17 @@ export class MarkEditComponent implements OnInit, AfterViewInit {
   private sub: any;
   idcko: number;
 
-  mark: Mark;
+  mark: Mark = new Mark(null,'', 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif','',false, [], []);
   isSaving: boolean;
 
+  refresh: Subject<any> = new Subject();
+
+  starts: string[] = [
+  ];
+  ends: string[] = [
+  ];
   images: Image[] = [];
+
   constructor(private markService: MarkService,
               private eventManager: EventManager,
               private router: Router,
@@ -33,35 +41,31 @@ export class MarkEditComponent implements OnInit, AfterViewInit {
     this.sub = this.route.params.subscribe(params => {
       this.idcko = +params['id']; // (+) converts string 'id' to a number
       this.markService.find(this.idcko).subscribe(
-        (res => {this.mark = res;
-        this.images = this.mark.markImages;
-          console.log(this.mark);
-          console.log(this.images)
+        (res => {
+          this.mark = res;
+          this.images = this.mark.markImages;
+
+            for (let i =0; i<this.mark.events.length; i++) {
+                this.starts[i] =  new Date(res.events[i].starting).toISOString().slice(0,16);
+                this.ends.push(new Date(res.events[i].ending).toISOString().slice(0,16));
+              }
         })
       );
-
-      // In a real app: dispatch action to load the details here.
     });
     this.isSaving = false;
-    this.markService.find(this.idcko).subscribe(
-      (res => {this.mark = res;
-        this.images = this.mark.markImages;
-        console.log(this.mark);
-        console.log(this.images)
-      })
-    );
   }
+
   ngAfterViewInit(){
-    console.log('View-edit');
-    console.log(this.idcko);
     this.markService.find(this.idcko).subscribe(
       (res => {this.mark = res;
         this.images = this.mark.markImages;
-        console.log(this.mark);
-        console.log(this.images)
+        for (let i =0; i<this.mark.events.length; i++) {
+          this.starts.push(this.mark.events[i].starting.toString().slice(0,16));
+          this.ends.push(this.mark.events[i].ending.toString().slice(0,16));
+        }
       })
     );
-    console.log(this.mark.title);
+
   }
 
   displayPhoto(fileInput) {
@@ -85,7 +89,7 @@ export class MarkEditComponent implements OnInit, AfterViewInit {
   }
 
   addImage() {
-     this.images.push(new Image(undefined, null));
+     this.images.push(new Image(undefined, 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif'));
   }
 
   removeImage(index) {
@@ -96,6 +100,10 @@ export class MarkEditComponent implements OnInit, AfterViewInit {
     this.isSaving = true;
 
     this.mark.markImages = this.images.slice(0);
+    for(let i=0; i<this.mark.events.length; i++){
+      this.mark.events[i].starting = new Date(this.starts[i]);
+      this.mark.events[i].ending = new Date(this.ends[i]);
+    }
 
     this.markService.create(this.mark).subscribe( res => {
       this.mark = res;

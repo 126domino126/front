@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {MarkEditComponent} from "./mark-edit.component";
-import {MarkEditService} from "./mark-edit.service";
+import {MarkService} from "../mark.service";
 
 @NgModule({
   imports: [
@@ -11,7 +11,7 @@ import {MarkEditService} from "./mark-edit.service";
     HttpClientModule,
     RouterModule
   ],
-  providers: [MarkEditService],
+  providers: [MarkService],
   declarations: [MarkEditComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

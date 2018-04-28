@@ -25,7 +25,7 @@ export class MarkService {
     }
 
     find(id: number): Observable<Mark> {
-        return this.http.get<Mark>(`${this.resourceUrl}/${id}`);
+      return this.http.get<Mark>(`${this.resourceUrl}/${id}`);
     }
 
     query(req?: any): Observable<Mark[]> {

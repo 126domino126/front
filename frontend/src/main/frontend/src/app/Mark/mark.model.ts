@@ -1,4 +1,5 @@
 import {Image} from "../Image/image.model";
+import {Event2} from "./event.model";
 
 export class Mark {
     constructor(
@@ -8,7 +9,7 @@ export class Mark {
         public description?: string,
         public favourite?: boolean,
         public markImages?: Image[],
-        public textFields?: String[],
+        public events?: Event2[],
     ) {
         this.favourite = false;
     }

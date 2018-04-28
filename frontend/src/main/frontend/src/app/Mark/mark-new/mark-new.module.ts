@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {MarkNewComponent} from "./mark-new.component";
-import {MarkNewService} from "./mark-new.service";
+import {DemoUtilsModule} from "../../demo-utils/module";
+import {MarkService} from "../mark.service";
+
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    DemoUtilsModule,
+
   ],
-  providers: [MarkNewService],
+  providers: [MarkService],
   declarations: [MarkNewComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

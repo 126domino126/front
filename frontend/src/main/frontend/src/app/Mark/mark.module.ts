@@ -5,6 +5,7 @@ import {MarkService} from "./mark.service";
 import {HttpModule} from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
+import {EventService} from "./event.service";
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     RouterModule
   ],
-  providers: [MarkService],
+  providers: [MarkService, EventService],
   declarations: [MarkComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
