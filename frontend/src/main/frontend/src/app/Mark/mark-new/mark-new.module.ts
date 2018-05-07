@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {MarkNewComponent} from "./mark-new.component";
 import {DemoUtilsModule} from "../../demo-utils/module";
 import {MarkService} from "../mark.service";
+import {ScannerService} from "../../QRcodeScan/scannerservice";
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import {MarkService} from "../mark.service";
     DemoUtilsModule,
 
   ],
-  providers: [MarkService],
+  providers: [MarkService, ScannerService],
   declarations: [MarkNewComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

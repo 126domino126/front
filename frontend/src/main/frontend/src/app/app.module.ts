@@ -19,6 +19,14 @@ import {CalendarModule} from "angular-calendar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LineChartDemoComponent} from "./chart/chart.component";
 import {ChartsModule} from "ng2-charts";
+import { NgQrScannerModule } from 'angular2-qrscanner';
+import {ScannerComponent} from "./QRcodeScan/scanner.component";
+import {HomeComponent} from "./Layout/home/home.component";
+import {ScannerService} from "./QRcodeScan/scannerservice";
+import {LoginService} from "./login/login.service";
+import {AppUserService} from "./login/appUser.service";
+import {LoginEditComponent} from "./login/edit/login.edit.component";
+import {FavsComponent} from "./Favs/favs.component";
 
 
 const appRoutes: Routes = [
@@ -26,8 +34,12 @@ const appRoutes: Routes = [
   { path: 'marks/edit/:id', component: MarkEditComponent },
   { path: 'marks/new', component: MarkNewComponent },
   { path: 'marks', component: MarkComponent },
-  { path: '', component: NavbarComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'scanner', component: ScannerComponent },
+  { path: 'account-edit', component: LoginEditComponent },
+  { path: 'favourites', component: FavsComponent },
+  { path: '', component: HomeComponent },
+
 ];
 
 @NgModule({
@@ -37,7 +49,11 @@ const appRoutes: Routes = [
     MarkNewComponent,
     MarkEditComponent,
     LoginComponent,
-    LineChartDemoComponent
+    LoginEditComponent,
+    LineChartDemoComponent,
+    ScannerComponent,
+    HomeComponent,
+    FavsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +67,10 @@ const appRoutes: Routes = [
     DemoModule,
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
-    ChartsModule
+    ChartsModule,
+    NgQrScannerModule,
   ],
-    providers: [ MarkService ],
+    providers: [ MarkService, ScannerService, LoginService, AppUserService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

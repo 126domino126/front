@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AppUser} from "../../login/appUser.model";
+import {AppUserService} from "../../login/appUser.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-navbar',
@@ -6,15 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isIn = false;
-  toggleState() {
-    let bool = this.isIn;
-    this.isIn = bool === false;
-  }
 
-  constructor() { }
+  collapse: boolean = true;
+
+  user: AppUser = new AppUser('', '');
+  subscription: Subscription;
+
+  constructor(private appUserService: AppUserService) {
+    this.subscription = this.appUserService.getUser().subscribe(user => {this.user = user});
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.user = new AppUser('', '');
+    this.appUserService.save(this.user);
+  }
 }

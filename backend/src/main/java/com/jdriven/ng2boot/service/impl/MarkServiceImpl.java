@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.service.impl;
 
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Mark;
 import com.jdriven.ng2boot.entity.MarkRepository;
 import com.jdriven.ng2boot.service.api.MarkService;
@@ -61,6 +62,19 @@ public class MarkServiceImpl implements MarkService {
     public Mark findOne(Long id) {
         log.debug("Request to get Mark : {}", id);
         return markRepository.findOne(id);
+    }
+
+    /**
+     * Get one mark by user_id.
+     *
+     * @param user_id the id of the user_entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Mark> findByUser(AppUser user_id) {
+        log.debug("Request to get Mark : {}", user_id);
+        return markRepository.findByUser(user_id);
     }
 
     /**

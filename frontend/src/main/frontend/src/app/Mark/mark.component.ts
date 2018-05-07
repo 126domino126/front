@@ -10,6 +10,8 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import {AppUserService} from "../login/appUser.service";
+import {AppUser} from "../login/appUser.model";
 
 @Component({
   selector: 'app-mark',
@@ -20,15 +22,28 @@ export class MarkComponent implements OnInit, AfterViewInit {
   marks: Mark[];
   images: Image[];
 
-  constructor(private markService: MarkService) {
+  user: AppUser = new AppUser('', '');
+  constructor(private markService: MarkService,
+              private appUserService: AppUserService) {
+    this.user = this.appUserService.getUserNow();
+    console.log(this.user);
   }
 
   ngAfterViewInit(){
-      this.loadAll();
+    console.log(this.user);
+    console.log(this.user.id);
+
+    if (this.user !== null){
+      if (this.user.id !== undefined && this.user.id !== null){
+        console.log('LOAD-ALL');
+        this.loadAll();
+      }
+    }
+
   }
 
   loadAll() {
-    this.markService.query().subscribe(
+    this.markService.findByUser(this.user.id).subscribe(
       (res => {
         if (res !=null){
           this.marks = res;
@@ -45,6 +60,11 @@ export class MarkComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.loadAll();
+    if (this.user !== null){
+      if (this.user.id !== undefined && this.user.id !== null){
+        console.log('LOAD-ALL');
+        this.loadAll();
+      }
+    }
   }
 }

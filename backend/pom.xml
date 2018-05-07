@@ -20,11 +20,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -65,12 +60,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.liquibase.ext</groupId>-->
-            <!--<artifactId>liquibase-hibernate5</artifactId>-->
-            <!--<version>3.6</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -80,6 +69,18 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>2.2</version>
         </dependency>
     </dependencies>
 

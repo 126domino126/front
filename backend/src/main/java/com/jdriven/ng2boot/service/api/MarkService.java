@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.service.api;
 
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Mark;
 
 import java.util.List;
@@ -31,6 +32,14 @@ public interface MarkService {
      * @return the entity
      */
     Mark findOne(Long id);
+
+    /**
+     * Get the "id" mark.
+     *
+     * @param user_id the id of the user_entity
+     * @return the entity
+     */
+    List<Mark> findByUser(AppUser user_id);
 
     /**
      * Delete the "id" mark.

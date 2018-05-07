@@ -19,7 +19,7 @@ export class MarkEditComponent implements OnInit, AfterViewInit {
   private sub: any;
   idcko: number;
 
-  mark: Mark = new Mark(null,'', 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif','',false, [], []);
+  mark: Mark = new Mark(null,'', '' , 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif','',false, [], []);
   isSaving: boolean;
 
   refresh: Subject<any> = new Subject();

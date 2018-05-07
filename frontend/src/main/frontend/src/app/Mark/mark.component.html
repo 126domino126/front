@@ -1,47 +1,48 @@
-<div>
-  <div class="row">
-
+<div class="container">
+  <div class="jumbotron" *ngIf="user == null || user.id == undefined || user.id == null" style="text-align: center">
+    <h2 class="bg-warning">Not Logged in</h2>
+    <p>This function is available only to logged users</p>
+    <p>In case you do not have account, create one for free</p>
   </div>
+<div class="jumbotron" *ngIf="user != null && user.id != null && user.id != undefined">
+  <h2>Add new mark: </h2>
+    <button class="btn btn-primary" routerLinkActive="active" routerLink="/scanner" (click)="this.scanning = true">
+      <h4>New mark</h4>
+    </button>
 
-  <button class="btn btn-primary" routerLinkActive="active" routerLink="/marks/new"> New mark</button>
-
-  <br/>
-  <br/>
-  <br/>
-
+</div>
+  <div class="jumbotron" *ngIf="user != null && user.id != null && user.id != undefined">
+  <h2>Marks: </h2>
+  <hr>
   <div class="table-responsive" *ngIf="marks">
     <table class="table table-striped">
       <thead>
       <tr>
-        <th><span >ID</span></th>
-        <th><span >Title</span></th>
-        <th><span >Main Image Src</span></th>
-        <th><span >Description</span></th>
-        <th><span >Favourite</span></th>
-        <th><span >Images</span></th>
+        <!--<th><span >ID</span></th>-->
+        <th><span ><h3>Title</h3></span></th>
+        <th><span ><h3>Image</h3></span></th>
+        <th><span ><h3>Desc.</h3></span></th>
+        <th><span ><h3>Favourite</h3></span></th>
+
         <th></th>
+
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let mark of marks; let i = index">
-        <!--<td><a [routerLink]="['../mark', mark.id ]">{{mark.id}}</a></td>-->
-        <td>{{mark.id}}</td>
-        <td>{{mark.title}}</td>
-        <td>
-          <div align="center">
-            <img [src]="this.mark.mainImageSrc" alt=""  style="width:25%"/>
-          </div>
+        <!--<td>{{ mark.id}}</td>-->
+        <td><h3>{{mark.title}}</h3></td>
+        <td style=" max-width: 100px">
+            <img [src]="this.mark.mainImageSrc" alt=""  style="width:25%; "/>
         </td>
-        <td>{{mark.description}}</td>
-        <td>{{mark.favourite}}</td>
-        <td>
-          <div  class="modal-body" id="field_images" *ngFor="let event of marks[i].events; let ind = index">
-          {{ind}}.    {{event.starting}}
-          </div>
+        <td><h3>{{mark.description}}</h3></td>
+        <td *ngIf="mark.favourite"> <h2><span style="color: red" class="glyphicon glyphicon-heart"></span></h2> </td>
+        <td *ngIf="!mark.favourite"> <h2><span style="color: red" class="glyphicon glyphicon-heart-empty"></span></h2> </td>
+        <!--<td>-->
           <!--<div  class="modal-body" id="field_images" *ngFor="let image of marks[i].markImages; let ind = index">-->
             <!--<img [src]="image.imageSrc" alt="" style="width:100%" />-->
           <!--</div>-->
-        </td>
+        <!--</td>-->
 
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
@@ -52,5 +53,6 @@
       </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </div>

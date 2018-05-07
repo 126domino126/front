@@ -1,6 +1,7 @@
 package com.jdriven.ng2boot.controller;
 
 //import com.dominik_dujava.web.rest.util.HeaderUtil;
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Events;
 import com.jdriven.ng2boot.entity.Mark;
 import com.jdriven.ng2boot.service.api.MarkService;
@@ -94,6 +95,22 @@ public class MarkResource {
             log.error("Mark with id {} not found.", id);
         }
         return new ResponseEntity<Mark>(mark, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /marks/user/:id : get the "id" mark.
+     *
+     * @param id the id of the mark to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the mark, or with status 404 (Not Found)
+     */
+    @GetMapping("/marks/user/{id}")
+    public ResponseEntity<List<Mark>> getMarkByUser(@PathVariable AppUser id) {
+        log.debug("REST request to get Mark with user: {}", id);
+        List<Mark> mark = markService.findByUser(id);
+        if (mark == null) {
+            log.error("Mark with id {} not found.", id);
+        }
+        return new ResponseEntity<List<Mark>>(mark, HttpStatus.OK);
     }
 
     /**

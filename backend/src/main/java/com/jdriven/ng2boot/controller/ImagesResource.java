@@ -18,6 +18,7 @@ import java.util.Optional;
  * REST controller for managing Images.
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class ImagesResource {
 

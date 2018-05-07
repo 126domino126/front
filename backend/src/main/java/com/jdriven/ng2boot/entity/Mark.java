@@ -26,6 +26,9 @@ public class Mark implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "qr")
+    private String qr;
+
     @Lob
     @Column(name = "main_image_src")
     private String mainImageSrc;
@@ -35,6 +38,10 @@ public class Mark implements Serializable {
 
     @Column(name = "favourite")
     private Boolean favourite;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private AppUser appUser = new AppUser();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mark_id")
@@ -115,13 +122,11 @@ public class Mark implements Serializable {
 
     public Mark addMarkImages(Images images) {
         this.markImages.add(images);
-//        images.setMark(this.id);
         return this;
     }
 
     public Mark removeMarkImages(Images images) {
         this.markImages.remove(images);
-//        images.setMark(null);
         return this;
     }
 
@@ -152,6 +157,25 @@ public class Mark implements Serializable {
         this.events = events;
     }
 
+    public String getQr() {
+        return qr;
+    }
+
+    public void setQr(String qr) {
+        this.qr = qr;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -162,10 +186,7 @@ public class Mark implements Serializable {
             return false;
         }
         Mark mark = (Mark) o;
-        if (mark.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), mark.getId());
+        return mark.getId() != null && getId() != null && Objects.equals(getId(), mark.getId());
     }
 
     @Override

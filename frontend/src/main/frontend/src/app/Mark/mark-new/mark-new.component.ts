@@ -19,6 +19,8 @@ import {
 } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import {Event2} from "../event.model";
+import {ScannerService} from "../../QRcodeScan/scannerservice";
+import {AppUserService} from "../../login/appUser.service";
 
 const colors: any = {
   red: {
@@ -51,13 +53,15 @@ export class MarkNewComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  mark: Mark = new Mark(null, '', 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif','', false, [], []);
+  mark: Mark = new Mark(null,'', '', 'http://sanjivanihospitalsirsa.com/wp-content/uploads/2017/03/noimage.gif','', false, [], [], null);
   isSaving: boolean;
 
   images: Image[] = [];
   constructor(private markService: MarkService,
               private eventManager: EventManager,
-              private router: Router
+              private router: Router,
+              private scannerService: ScannerService,
+              private appUserService: AppUserService
               ) {
             }
 
@@ -91,6 +95,8 @@ export class MarkNewComponent implements OnInit {
 
   ngOnInit() {
     this.isSaving = false;
+    this.mark.qr = this.scannerService.load();
+    console.log(this.mark.qr);
   }
 
   save() {
@@ -103,6 +109,8 @@ export class MarkNewComponent implements OnInit {
 
     this.mark.markImages = this.images;
     this.mark.events = this.eventsSent;
+    this.mark.appUser = this.appUserService.getUserNow();
+    console.log(this.mark.appUser);
     this.markService.create(this.mark).subscribe( res => {
       this.mark = res;
       this.router.navigateByUrl('/marks');
