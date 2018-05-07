@@ -1,0 +1,28 @@
+h3 {
+  text-align: center;
+}
+
+.outer-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-inside: 10%;
+}
+.inner-container {
+  border: 1px solid black;
+  display: inline-block;
+  position: relative;
+}
+.video-overlay {
+  position: absolute;
+  border: 1px solid black;
+  margin: 17%;
+  width: 65%;
+  height: 55%;
+  color: #FFF;
+  background-color: rgba(50, 50, 50, 0.3);
+}
+qr-scanner {
+  width: 100%;
+  height: 100%;
+}
