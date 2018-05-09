@@ -1,4 +1,5 @@
-<div class="container">
+<app-error *ngIf="user == null || user.id == undefined || user.id == null"></app-error>
+<div class="container" *ngIf="user != null && user.id != null && user.id != undefined">
 <div class="jumbotron">
  <ng-template #modalContent let-close="close">
   <div class="modal-header">

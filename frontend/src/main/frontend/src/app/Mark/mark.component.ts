@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { AfterViewInit } from '@angular/core';
-import {Subscription} from "rxjs/Subscription";
 import {Mark} from "./mark.model";
-import {EventManager} from "@angular/platform-browser";
 import {MarkService} from "./mark.service";
 import {Image} from "../Image/image.model";
 import {
@@ -12,6 +10,7 @@ import {
 } from 'angular-calendar';
 import {AppUserService} from "../login/appUser.service";
 import {AppUser} from "../login/appUser.model";
+import {Scanner2Service} from "../QRcodeScan/scanner2.service";
 
 @Component({
   selector: 'app-mark',
@@ -24,7 +23,8 @@ export class MarkComponent implements OnInit, AfterViewInit {
 
   user: AppUser = new AppUser('', '');
   constructor(private markService: MarkService,
-              private appUserService: AppUserService) {
+              private appUserService: AppUserService,
+              private scanner2Service: Scanner2Service) {
     this.user = this.appUserService.getUserNow();
     console.log(this.user);
   }
@@ -35,7 +35,6 @@ export class MarkComponent implements OnInit, AfterViewInit {
 
     if (this.user !== null){
       if (this.user.id !== undefined && this.user.id !== null){
-        console.log('LOAD-ALL');
         this.loadAll();
       }
     }
@@ -60,6 +59,7 @@ export class MarkComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.scanner2Service.setState('new');
     if (this.user !== null){
       if (this.user.id !== undefined && this.user.id !== null){
         console.log('LOAD-ALL');

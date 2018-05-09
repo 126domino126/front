@@ -1,9 +1,12 @@
+<app-error *ngIf="user == null || user.id == undefined || user.id == null"></app-error>
+
 <div class="container">
-  <div class="jumbotron" *ngIf="user == null || user.id == undefined || user.id == null" style="text-align: center">
-    <h2 class="bg-warning">Not Logged in</h2>
-    <p>This function is available only to logged users</p>
-    <p>In case you do not have account, create one for free</p>
-  </div>
+
+  <!--<div class="jumbotron" *ngIf="user == null || user.id == undefined || user.id == null" style="text-align: center">-->
+    <!--<h2 class="bg-warning">Not Logged in</h2>-->
+    <!--<p>This function is available only to logged users</p>-->
+    <!--<p>In case you do not have account, create one for free</p>-->
+  <!--</div>-->
 
   <div class="jumbotron" *ngIf="user != null && user.id != null && user.id != undefined">
   <h2>Marks: </h2>
@@ -41,4 +44,11 @@
     </table>
   </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>

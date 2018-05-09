@@ -28,6 +28,10 @@ export class MarkService {
       return this.http.get<Mark>(`${this.resourceUrl}/${id}`);
     }
 
+    findByQr(qr: string): Observable<Mark> {
+      return this.http.get<Mark>(`${this.resourceUrl}/qr/${qr}`);
+    }
+
     findByUser(user_id: number): Observable<Mark[]> {
       return this.http.get<Mark[]>(`${this.resourceUrl}/user/${user_id}`);
     }

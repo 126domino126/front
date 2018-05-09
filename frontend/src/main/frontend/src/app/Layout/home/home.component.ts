@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Scanner2Service} from "../../QRcodeScan/scanner2.service";
+import {AppUser} from "../../login/appUser.model";
+import {AppUserService} from "../../login/appUser.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user: AppUser;
+
+  constructor( private scanner2Service: Scanner2Service,
+               private appUserService: AppUserService) { }
 
   ngOnInit() {
+    this.scanner2Service.setState('scan');
+    this.user = this.appUserService.getUserNow();
   }
 
 }

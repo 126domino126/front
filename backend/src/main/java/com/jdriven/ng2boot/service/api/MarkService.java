@@ -33,6 +33,8 @@ public interface MarkService {
      */
     Mark findOne(Long id);
 
+    Mark findByQr(String id);
+
     /**
      * Get the "id" mark.
      *

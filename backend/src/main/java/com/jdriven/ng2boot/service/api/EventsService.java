@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.service.api;
 
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Events;
 
 import java.awt.*;
@@ -39,4 +40,6 @@ public interface EventsService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<Events> findByUser(AppUser appUser);
 }

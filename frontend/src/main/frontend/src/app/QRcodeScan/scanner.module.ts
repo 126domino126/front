@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import {ScannerComponent} from "./scanner.component";
 import {NgQrScannerModule} from "angular2-qrscanner";
 import {ScannerService} from "./scannerservice";
+import {Scanner2Service} from "./scanner2.service";
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import {ScannerService} from "./scannerservice";
     RouterModule,
     NgQrScannerModule,
   ],
-  providers: [ScannerService],
+  providers: [ScannerService, Scanner2Service],
   declarations: [ScannerComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

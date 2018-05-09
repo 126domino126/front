@@ -27,6 +27,10 @@ import {LoginService} from "./login/login.service";
 import {AppUserService} from "./login/appUser.service";
 import {LoginEditComponent} from "./login/edit/login.edit.component";
 import {FavsComponent} from "./Favs/favs.component";
+import {ErrorComponent} from "./Layout/error/error.component";
+import {ErrorModule} from "./Layout/error/error.module";
+import {Scanner2Service} from "./QRcodeScan/scanner2.service";
+import {ScannerModule} from "./QRcodeScan/scanner.module";
 
 
 const appRoutes: Routes = [
@@ -51,7 +55,7 @@ const appRoutes: Routes = [
     LoginComponent,
     LoginEditComponent,
     LineChartDemoComponent,
-    ScannerComponent,
+    // ScannerComponent,
     HomeComponent,
     FavsComponent
   ],
@@ -69,8 +73,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ChartsModule,
     NgQrScannerModule,
+    ScannerModule,
+    ErrorModule
   ],
-    providers: [ MarkService, ScannerService, LoginService, AppUserService],
+    providers: [ MarkService, ScannerService, Scanner2Service, LoginService, AppUserService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

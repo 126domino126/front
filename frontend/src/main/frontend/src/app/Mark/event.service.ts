@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Mark } from './mark.model';
 import {tap} from "rxjs/operators";
 import {Event2} from "./event.model";
+import {AppUser} from "../login/appUser.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,9 +26,9 @@ export class EventService {
     //     return this.http.put(this.resourceUrl, mark, httpOptions);
     // }
     //
-    // find(id: number): Observable<Mark> {
-    //   return this.http.get<Mark>(`${this.resourceUrl}/${id}`);
-    // }
+    findByUser(id: number): Observable<Event2[]> {
+      return this.http.get<Event2[]>(`${this.resourceUrl}/user/${id}`);
+     }
 
     query(req?: any): Observable<Event2[]> {
         return this.http.get<Event2[]>(this.resourceUrl);

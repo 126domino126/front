@@ -113,6 +113,17 @@ public class MarkResource {
         return new ResponseEntity<List<Mark>>(mark, HttpStatus.OK);
     }
 
+    @GetMapping("/marks/qr/{id}")
+    public ResponseEntity<Mark> getMarkByQr(@PathVariable String id) {
+        log.debug("REST request to get Mark with qr: {}", id);
+        Mark mark = markService.findByQr(id);
+        if (mark == null) {
+            log.error("Mark with id {} not found.", id);
+        }
+        return new ResponseEntity<Mark>(mark, HttpStatus.OK);
+    }
+
+
     /**
      * DELETE  /marks/:id : delete the "id" mark.
      *

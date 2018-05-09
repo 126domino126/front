@@ -16,4 +16,7 @@ public interface MarkRepository extends JpaRepository<Mark, Long> {
 
     @Query("SELECT m FROM Mark m where m.appUser = :user_id")
     List<Mark> findByUser(@Param("user_id") AppUser user_id);
+
+    @Query("SELECT m FROM Mark m where m.qr = :qr")
+    Mark findByQr(@Param("qr") String qr);
 }

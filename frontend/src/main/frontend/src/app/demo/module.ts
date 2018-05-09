@@ -7,6 +7,7 @@ import { DemoUtilsModule } from '../demo-utils/module';
 import { DemoComponent } from './component';
 import { RouterModule } from '@angular/router';
 import {EventService} from "../Mark/event.service";
+import {ErrorModule} from "../Layout/error/error.module";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {EventService} from "../Mark/event.service";
         NgbModalModule.forRoot(),
         CalendarModule.forRoot(),
         DemoUtilsModule,
-        RouterModule
+        RouterModule,
+        ErrorModule
     ],
     providers: [EventService],
     declarations: [DemoComponent],

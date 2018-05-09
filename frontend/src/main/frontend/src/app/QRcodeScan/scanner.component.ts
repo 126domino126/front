@@ -2,6 +2,8 @@ import {Component, ViewChild, ViewEncapsulation, OnInit} from '@angular/core';
 import {QrScannerComponent} from 'angular2-qrscanner';
 import {Router} from "@angular/router";
 import {ScannerService} from "./scannerservice";
+import {MarkService} from "../Mark/mark.service";
+import {Scanner2Service} from "./scanner2.service";
 
 @Component({
   selector: 'app-scanner',
@@ -14,7 +16,9 @@ export class ScannerComponent implements OnInit {
   @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent ;
 
   constructor(private  router: Router,
-              private scannerService: ScannerService){
+              private scannerService: ScannerService,
+              private scanner2Service: Scanner2Service,
+              private markService: MarkService){
   }
 
   ngOnInit() {
@@ -45,7 +49,24 @@ export class ScannerComponent implements OnInit {
     this.qrScannerComponent.capturedQr.subscribe(result => {
       console.log("component: " + result);
       this.scannerService.save(result);
-      this.router.navigateByUrl('/marks/new');
+      console.log(result);
+      if (this.scanner2Service.getState() === 'new')
+        this.router.navigateByUrl('/marks/new');
+      if (this.scanner2Service.getState() === 'scan'){
+        this.markService.findByQr(result).subscribe(
+          (res => {
+            console.log(res);
+            console.log('/marks/edit/'+ res.id);
+            if (res !=null){
+              this.router.navigateByUrl('/marks/edit/'+ res.id);
+            }
+            else{
+              this.router.navigateByUrl('/marks/new');
+            }
+          })
+        );
+
+      }
     });
   }
 }

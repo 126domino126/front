@@ -77,6 +77,13 @@ public class MarkServiceImpl implements MarkService {
         return markRepository.findByUser(user_id);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Mark findByQr(String id) {
+        log.debug("Request to get Mark : {}", id);
+        return markRepository.findByQr(id);
+    }
+
     /**
      * Delete the mark by id.
      *

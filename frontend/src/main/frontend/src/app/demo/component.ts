@@ -7,12 +7,9 @@ import {
 import {
     startOfDay,
     endOfDay,
-    subDays,
     addDays,
-    endOfMonth,
     isSameDay,
     isSameMonth,
-    addHours
 } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +22,8 @@ import {Event2} from "../Mark/event.model";
 import {MarkService} from "../Mark/mark.service";
 import {Mark} from "../Mark/mark.model";
 import {EventService} from "../Mark/event.service";
-import {falseIfMissing} from "protractor/built/util";
+import {AppUser} from "../login/appUser.model";
+import {AppUserService} from "../login/appUser.service";
 
 const colors: any = {
     red: {
@@ -55,6 +53,7 @@ export class DemoComponent implements OnInit {
 
     viewDate: Date = new Date();
 
+    user: AppUser;
     marks: Mark[];
     eventParse: Event2[];
 
@@ -88,11 +87,14 @@ export class DemoComponent implements OnInit {
 
     constructor(private modal: NgbModal,
                 private markService: MarkService,
-                private eventService: EventService) {}
+                private eventService: EventService,
+                private  appUserService: AppUserService) {}
 
     ngOnInit() {
-
-      this.eventService.query().subscribe(
+      this.user = this.appUserService.getUserNow();
+      console.log(this.user);
+      if (this.user !== null && this.user.id !== undefined){
+      this.eventService.findByUser(this.user.id).subscribe(
         (res => {
           if (res !=null){
             this.eventParse = res;
@@ -145,6 +147,7 @@ export class DemoComponent implements OnInit {
           }
         })
       )
+      }
     }
 
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -173,8 +176,6 @@ export class DemoComponent implements OnInit {
     }
 
     handleEvent(action: string, event: CalendarEvent): void {
-        // this.modalData = { event, action };
-        // this.modal.open(this.modalContent, { size: 'lg' });
     }
 
     addEvent(): void {

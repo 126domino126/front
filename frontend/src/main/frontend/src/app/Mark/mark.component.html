@@ -1,12 +1,9 @@
+<app-error *ngIf="user == null || user.id == undefined || user.id == null"></app-error>
+
 <div class="container">
-  <div class="jumbotron" *ngIf="user == null || user.id == undefined || user.id == null" style="text-align: center">
-    <h2 class="bg-warning">Not Logged in</h2>
-    <p>This function is available only to logged users</p>
-    <p>In case you do not have account, create one for free</p>
-  </div>
 <div class="jumbotron" *ngIf="user != null && user.id != null && user.id != undefined">
   <h2>Add new mark: </h2>
-    <button class="btn btn-primary" routerLinkActive="active" routerLink="/scanner" (click)="this.scanning = true">
+    <button class="btn btn-dark" routerLinkActive="active" routerLink="/scanner">
       <h4>New mark</h4>
     </button>
 
@@ -38,15 +35,10 @@
         <td><h3>{{mark.description}}</h3></td>
         <td *ngIf="mark.favourite"> <h2><span style="color: red" class="glyphicon glyphicon-heart"></span></h2> </td>
         <td *ngIf="!mark.favourite"> <h2><span style="color: red" class="glyphicon glyphicon-heart-empty"></span></h2> </td>
-        <!--<td>-->
-          <!--<div  class="modal-body" id="field_images" *ngFor="let image of marks[i].markImages; let ind = index">-->
-            <!--<img [src]="image.imageSrc" alt="" style="width:100%" />-->
-          <!--</div>-->
-        <!--</td>-->
 
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
-            <button class="btn btn-primary" routerLinkActive="active" [routerLink]="['/marks/edit', mark.id]" > EDIT </button>
+            <button class="btn btn-dark" routerLinkActive="active" [routerLink]="['/marks/edit', mark.id]" > EDIT </button>
           <button type="button" class="btn btn-danger" (click)="deleteMark(i)"> DELETE </button>
           </div>
         </td>

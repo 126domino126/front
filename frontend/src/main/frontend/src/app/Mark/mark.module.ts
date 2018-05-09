@@ -6,12 +6,14 @@ import {HttpModule} from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {EventService} from "./event.service";
+import {ErrorModule} from "../Layout/error/error.module";
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ErrorModule
   ],
   providers: [MarkService, EventService],
   declarations: [MarkComponent],

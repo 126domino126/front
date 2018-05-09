@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.controller;
 
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Events;
 import com.jdriven.ng2boot.service.api.EventsService;
 import org.slf4j.Logger;
@@ -94,6 +95,15 @@ public class EventsResource {
         return new ResponseEntity<Events>(events, HttpStatus.OK);
     }
 
+    @GetMapping("/events/user/{appUser}")
+    public ResponseEntity<List<Events>> getEvent(@PathVariable AppUser appUser) {
+        log.debug("REST request to get Events : {}", appUser);
+        List<Events> events = eventsService.findByUser(appUser);
+        if (events == null) {
+            log.error("Event with id {} not found.", appUser);
+        }
+        return new ResponseEntity<List<Events>>(events, HttpStatus.OK);
+    }
     /**
      * DELETE  /events/:id : delete the "id" event.
      *

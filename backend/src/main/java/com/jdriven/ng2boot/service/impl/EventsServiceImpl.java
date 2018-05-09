@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.service.impl;
 
+import com.jdriven.ng2boot.entity.AppUser;
 import com.jdriven.ng2boot.entity.Events;
 import com.jdriven.ng2boot.entity.EventsRepository;
 import com.jdriven.ng2boot.service.api.EventsService;
@@ -63,6 +64,13 @@ public class EventsServiceImpl implements EventsService {
     public Events findOne(Long id) {
         log.debug("Request to get Event : {}", id);
         return eventsRepository.findOne(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Events> findByUser(AppUser user_id) {
+        log.debug("Request to get Events by user : {}", user_id);
+        return eventsRepository.findByUser(user_id);
     }
 
     /**
